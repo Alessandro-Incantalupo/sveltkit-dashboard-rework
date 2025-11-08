@@ -1,0 +1,59 @@
+name: Docker Build Validation
+
+on:
+    push:
+        branches:
+            - main
+    pull_request:
+        branches:
+            - main
+
+jobs:
+    build-and-validate:
+        runs-on: ubuntu-latest
+        permissions:
+            contents: read
+
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v4
+
+            - name: Set up Docker Buildx
+              uses: docker/setup-buildx-action@v3
+
+            - name: Build Docker image
+              uses: docker/build-push-action@v5
+              with:
+                  context: .
+                  file: ./Dockerfile
+                  push: false
+                  tags: sveltekit-dashboard-2:latest
+                  cache-from: type=gha
+                  cache-to: type=gha,mode=max
+                  load: true
+
+            - name: Display image size and info
+              run: |
+                  echo "✅ Docker image built successfully!"
+                  echo ""
+                  echo "📦 Image Details:"
+                  docker images sveltekit-dashboard-2:latest --format "table {{.Repository}}\t{{.Tag}}\t{{.Size}}\t{{.CreatedAt}}"
+                  echo ""
+                  echo "📊 Layer Breakdown:"
+                  docker history sveltekit-dashboard-2:latest --human --format "table {{.Size}}\t{{.CreatedBy}}" | head -20
+
+            - name: Test container startup
+              run: |
+                  echo "🧪 Testing container startup..."
+                  docker run -d --name test-container -p 3000:3000 sveltekit-dashboard-2:latest
+                  sleep 5
+
+                  echo "🔍 Checking health..."
+                  docker ps -a --filter name=test-container
+
+                  echo "📋 Container logs:"
+                  docker logs test-container
+
+                  echo "🧹 Cleanup..."
+                  docker stop test-container
+                  docker rm test-container

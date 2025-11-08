@@ -1,0 +1,52 @@
+# Dependencies (installed fresh in container)
+node_modules/
+
+# Build outputs (generated in container)
+build/
+.svelte-kit/
+.output/
+dist/
+
+# Development files
+.git/
+.github/
+.vscode/
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Testing
+coverage/
+.vitest/
+*.spec.ts
+*.test.ts
+
+# Environment files (passed at runtime)
+.env
+.env.*
+!.env.example
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Study materials
+study-folder/
+
+# Docker files
+Dockerfile
+.dockerignore
+docker-compose.yml
+
+# Documentation
+README.md
+CHANGELOG.md
+LICENSE
+
+# IDE
+.idea/
+*.swp
+*.swo
+*~
