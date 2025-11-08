@@ -1,0 +1,7 @@
+{
+	"$schema": "https://inlang.com/schema/inlang-message-format",
+	"hello_world": "Hello, {name}!",
+	"welcome_message": "Welcome to our multilingual dashboard",
+	"language_selector": "Choose your language:",
+	"products_count": "You have {count} products in your cart"
+}
