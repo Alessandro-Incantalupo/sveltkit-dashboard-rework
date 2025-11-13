@@ -4,14 +4,18 @@
 		"a11y-click-events-have-key-events": "ignore",
 		"a11y-no-static-element-interactions": "ignore"
 	},
-	
+
 	// Make TypeScript more responsive to file changes
 	"typescript.tsserver.experimental.enableProjectDiagnostics": true,
 	"typescript.suggest.autoImports": true,
-	
+
 	// Auto-save helps trigger language server updates
 	"files.autoSave": "onFocusChange",
-	
+
 	// Svelte plugin settings for better performance
-	"svelte.enable-ts-plugin": true
+	"svelte.enable-ts-plugin": true,
+
+	// CSS settings for Tailwind v4
+	"css.customData": [],
+	"css.lint.unknownAtRules": "ignore"
 }
